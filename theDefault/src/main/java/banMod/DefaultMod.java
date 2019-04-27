@@ -1,5 +1,6 @@
 package banMod;
 
+import banMod.relics.*;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
@@ -25,10 +26,6 @@ import banMod.cards.*;
 import banMod.characters.TheDefault;
 import banMod.events.IdentityCrisisEvent;
 import banMod.potions.PlaceholderPotion;
-import banMod.relics.BottledPlaceholderRelic;
-import banMod.relics.DefaultClickableRelic;
-import banMod.relics.PlaceholderRelic;
-import banMod.relics.PlaceholderRelic2;
 import banMod.util.IDCheckDontTouchPls;
 import banMod.util.TextureLoader;
 import banMod.variables.DefaultCustomVariable;
@@ -376,6 +373,11 @@ public class DefaultMod implements
         
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
+        BaseMod.addRelic(new CapturedWildfire(), RelicType.SHARED);
+        BaseMod.addRelic(new CheapLighter(), RelicType.SHARED);
+        BaseMod.addRelic(new CrashTestDummy(), RelicType.SHARED);
+        BaseMod.addRelic(new RakkoonTail(), RelicType.SHARED);
+        BaseMod.addRelic(new StellarCharm(), RelicType.SHARED);
         
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
         UnlockTracker.markRelicAsSeen(BottledPlaceholderRelic.ID);

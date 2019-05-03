@@ -30,5 +30,40 @@
       ".",
       "Select a card to bottle for "
     ]
+  },
+  "banMod:CapturedWildfire": {
+    "NAME": "Captured Wildfire",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "Gain #b1 [E]. Upon pickup, remove and ban all copies of 2 random cards from your deck. Prioritizes upgraded cards."
+    ]
+  },
+  "banMod:CheapLighter": {
+    "NAME": "Cheap Lighter",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "At campfires, you may ban a card as a free action."
+    ]
+  },
+  "banMod:CrashTestDummy": {
+    "NAME": "Crash Test Dummy",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "Pick an Elite. The next time you would encounter that Elite, generate a different random elite instead."
+    ]
+  },
+  "banMod:RakkoonTail": {
+    "NAME": "Rakkoon Tail",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "Pick one Elite. Pick one boss. You won't encounter either in the next act."
+    ]
+  },
+  "banMod:StellarCharm": {
+    "NAME": "Cheap Lighter",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "Upon pickup, ban and remove all copies of one curse from your deck."
+    ]
   }
 }

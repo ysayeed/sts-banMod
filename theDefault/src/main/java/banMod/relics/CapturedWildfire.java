@@ -19,8 +19,8 @@ public class CapturedWildfire extends CustomRelic {
     // ID, images, text.
     public static final String ID = DefaultMod.makeID("CapturedWildfire");
 
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change
+    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic3.png")); //change
+    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic3.png")); //change
 
     public CapturedWildfire() {
         super(ID, IMG, OUTLINE, RelicTier.BOSS, LandingSound.MAGICAL);

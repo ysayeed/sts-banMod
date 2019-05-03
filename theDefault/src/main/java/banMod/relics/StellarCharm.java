@@ -12,7 +12,7 @@ public class StellarCharm extends CustomRelic {
     /*
      * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
      *
-     * Upon pickup, ban one curse.
+     * Upon pickup, ban and remove all copies of one curse from your deck.
      */
 
     // ID, images, text.
@@ -22,7 +22,7 @@ public class StellarCharm extends CustomRelic {
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change
 
     public StellarCharm() {
-        super(ID, IMG, OUTLINE, RelicTier.COMMON, LandingSound.FLAT);
+        super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     // Description

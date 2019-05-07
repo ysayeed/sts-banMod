@@ -164,9 +164,9 @@ public class TheDefault extends CustomPlayer {
         retVal.add(DefaultUncommonSkill.ID);
         retVal.add(DefaultRareSkill.ID);
 
-        retVal.add(DefaultCommonPower.ID);
+        //retVal.add(DefaultCommonPower.ID);
         retVal.add(DefaultUncommonPower.ID);
-        retVal.add(DefaultRarePower.ID);
+        //retVal.add(DefaultRarePower.ID);
 
         retVal.add(DefaultAttackWithVariable.ID);
         retVal.add(DefaultSecondMagicNumberSkill.ID);

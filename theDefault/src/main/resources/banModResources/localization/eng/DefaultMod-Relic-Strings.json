@@ -60,10 +60,10 @@
     ]
   },
   "banMod:StellarCharm": {
-    "NAME": "Cheap Lighter",
+    "NAME": "Stellar Charm",
     "FLAVOR": "",
     "DESCRIPTIONS": [
-      "Upon pickup, ban and remove all copies of one curse from your deck."
+      "Upon pickup, ban a curse. Remove all copies of it from your deck."
     ]
   }
 }

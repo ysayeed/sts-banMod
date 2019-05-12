@@ -3,6 +3,7 @@ package banMod.relics;
 import banMod.cards.BanEliteCard;
 import basemod.BaseMod;
 import basemod.abstracts.CustomRelic;
+import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import banMod.DefaultMod;
 import banMod.util.TextureLoader;
@@ -15,7 +16,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import static banMod.DefaultMod.makeRelicOutlinePath;
 import static banMod.DefaultMod.makeRelicPath;
 
-public class CrashTestDummy extends CustomRelic {
+public class CrashTestDummy extends CustomRelic implements CustomSavable<String> {
     /*
      * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
      *
@@ -29,7 +30,6 @@ public class CrashTestDummy extends CustomRelic {
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change
 
     private String eliteName = null;
-    private int uses = 1;
 
     public CrashTestDummy() {
         super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.CLINK);
@@ -44,10 +44,32 @@ public class CrashTestDummy extends CustomRelic {
     @Override
     public void onEquip(){
         flash();
+        this.counter = 1;
         if (eliteName==null) {
             CardGroup elites = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-            for (String m : AbstractDungeon.eliteMonsterList){
-                elites.addToTop(new BanEliteCard(m));
+            //manually add in default Elites, and use BaseMod to pick up mod-added elites
+            elites.addToTop(new BanEliteCard("Gremlin Nob"));
+            elites.addToTop(new BanEliteCard("Lagavulin"));
+            elites.addToTop(new BanEliteCard("3 Sentries"));
+            elites.addToTop(new BanEliteCard("Gremlin Leader"));
+            elites.addToTop(new BanEliteCard("Slavers"));
+            elites.addToTop(new BanEliteCard("Book of Stabbing"));
+            elites.addToTop(new BanEliteCard("Giant Head"));
+            elites.addToTop(new BanEliteCard("Nemesis"));
+            elites.addToTop(new BanEliteCard("Reptomancer"));
+            elites.addToTop(new BanEliteCard("Shield and Spear"));
+
+            for (MonsterInfo m : BaseMod.getEliteEncounters("Exordium")){
+                elites.addToTop(new BanEliteCard(m.name));
+            }
+            for (MonsterInfo m : BaseMod.getEliteEncounters("TheCity")){
+                elites.addToTop(new BanEliteCard(m.name));
+            }
+            for (MonsterInfo m : BaseMod.getEliteEncounters("TheBeyond")){
+                elites.addToTop(new BanEliteCard(m.name));
+            }
+            for (MonsterInfo m : BaseMod.getEliteEncounters("TheEnding")){
+                elites.addToTop(new BanEliteCard(m.name));
             }
             AbstractDungeon.gridSelectScreen.open(elites, 1, "", false);
         }
@@ -60,14 +82,24 @@ public class CrashTestDummy extends CustomRelic {
         if (eliteName == null && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()){
             eliteName = ((BanEliteCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0)).name;
         }
+        AbstractDungeon.gridSelectScreen.selectedCards.clear();
     }
 
     @Override
     public void atBattleStart() {
-        if (AbstractDungeon.getCurrRoom().eliteTrigger && this.uses > 0) { //add in a check for the elite
+        if (AbstractDungeon.getCurrRoom().eliteTrigger && this.counter > 0) { //add in a check for the elite
             this.flash();
-            this.uses--;
+            this.counter--;
         }
-        AbstractDungeon.gridSelectScreen.selectedCards.clear();
+    }
+
+    @Override
+    public String onSave(){
+        return this.eliteName;
+    }
+
+    @Override
+    public void onLoad(String s){
+        this.eliteName = s;
     }
 }

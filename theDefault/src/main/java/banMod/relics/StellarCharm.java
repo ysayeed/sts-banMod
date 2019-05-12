@@ -1,6 +1,8 @@
 package banMod.relics;
 
+import banMod.util.Ban;
 import basemod.abstracts.CustomRelic;
+import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import banMod.DefaultMod;
 import banMod.util.TextureLoader;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 import static banMod.DefaultMod.makeRelicOutlinePath;
 import static banMod.DefaultMod.makeRelicPath;
 
-public class StellarCharm extends CustomRelic {
+public class StellarCharm extends CustomRelic implements CustomSavable<String> {
     /*
      * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
      *
@@ -26,8 +28,7 @@ public class StellarCharm extends CustomRelic {
 
     // ID, images, text.
     public static final String ID = DefaultMod.makeID("StellarCharm");
-    private String curseName = "";
-    private boolean cardSelected = true;
+    private String curseID = null;
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change
@@ -44,7 +45,6 @@ public class StellarCharm extends CustomRelic {
 
     @Override
     public void onEquip(){
-        this.cardSelected = false;
         if (AbstractDungeon.isScreenUp) {
             AbstractDungeon.dynamicBanner.hide();
             AbstractDungeon.overlayMenu.cancelButton.hide();
@@ -58,13 +58,15 @@ public class StellarCharm extends CustomRelic {
     public void update(){
         ArrayList<AbstractCard> toRemove = new ArrayList<>();
         super.update();
-        if (!this.cardSelected && AbstractDungeon.gridSelectScreen.selectedCards.size() == 1) {
-            this.cardSelected = true;
+        if (this.curseID == null && AbstractDungeon.gridSelectScreen.selectedCards.size() == 1) {
             AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(AbstractDungeon.gridSelectScreen.selectedCards.get(0), (float) Settings.WIDTH / 2.0F - 30.0F * Settings.scale - AbstractCard.IMG_WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
-            this.curseName = AbstractDungeon.gridSelectScreen.selectedCards.get(0).name;
+            AbstractCard card = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
+
+            this.curseID = card.cardID;
+            Ban.banCard(card);
 
             for (AbstractCard c: AbstractDungeon.player.masterDeck.group){
-                if (c.name == this.curseName){
+                if (c.cardID == this.curseID){
                     toRemove.add(c);
                 }
             }
@@ -72,7 +74,7 @@ public class StellarCharm extends CustomRelic {
             for (AbstractCard c: toRemove){
                 AbstractDungeon.player.masterDeck.removeCard(c);
             }
-
+            ;
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
         }
@@ -81,7 +83,7 @@ public class StellarCharm extends CustomRelic {
     public void onMasterDeckChange(){ //shortcut that will interact poorly with Omamori. Fix with spirepatch later instead.
         ArrayList<AbstractCard> toRemove = new ArrayList<>();
         for (AbstractCard c: AbstractDungeon.player.masterDeck.group){
-            if (c.name == this.curseName){
+            if (c.cardID == this.curseID){
                 toRemove.add(c);
             }
         }
@@ -90,5 +92,13 @@ public class StellarCharm extends CustomRelic {
             AbstractDungeon.player.masterDeck.removeCard(c);
             AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(c, (float) Settings.WIDTH / 2.0F - 30.0F * Settings.scale - AbstractCard.IMG_WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
         }
+    }
+    @Override
+    public String onSave(){
+        return this.curseID;
+    }
+    @Override
+    public void onLoad(String s){
+        this.curseID = s;
     }
 }

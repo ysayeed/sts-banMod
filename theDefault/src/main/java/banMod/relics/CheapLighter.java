@@ -31,4 +31,9 @@ public class CheapLighter extends CustomRelic {
         return DESCRIPTIONS[0];
     }
 
+    @Override
+    public void onRest(){
+        //TODO
+    }
+
 }

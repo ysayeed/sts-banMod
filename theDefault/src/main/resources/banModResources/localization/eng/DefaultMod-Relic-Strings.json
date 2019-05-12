@@ -65,5 +65,21 @@
     "DESCRIPTIONS": [
       "Upon pickup, ban a curse. Remove all copies of it from your deck."
     ]
+  },
+  "banMod:FeatherToken": {
+    "NAME": "Feather Token",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "Pick a status. Whenever you draw that card, exhaust it and draw a new card.",
+      "Whenever you draw ",
+      ", exhaust it and draw another card."
+    ]
+  },
+  "banMod:FoolsGold": {
+    "NAME": "Fool's Gold",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "Obtain a selection of a rare card. If you choose one, ban the unchosen ones."
+    ]
   }
 }

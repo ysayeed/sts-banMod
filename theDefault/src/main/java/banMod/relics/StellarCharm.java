@@ -74,7 +74,6 @@ public class StellarCharm extends CustomRelic implements CustomSavable<String> {
             for (AbstractCard c: toRemove){
                 AbstractDungeon.player.masterDeck.removeCard(c);
             }
-            ;
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
         }

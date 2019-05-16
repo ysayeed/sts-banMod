@@ -1,5 +1,6 @@
 package banMod.relics;
 
+import banMod.util.Ban;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import banMod.DefaultMod;
@@ -18,7 +19,7 @@ public class FoolsGold extends CustomRelic {
     /*
      * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
      *
-     * Obtain a selection of a rare card. If you choose one, ban the unchosen ones.
+     * Obtain a selection of rare cards. If you choose one, ban the unchosen ones.
      */
 
     // ID, images, text.
@@ -26,6 +27,8 @@ public class FoolsGold extends CustomRelic {
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change
+
+    private CardGroup rewards = null;
 
     public FoolsGold() {
         super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.CLINK);
@@ -40,13 +43,27 @@ public class FoolsGold extends CustomRelic {
     @Override
     public void onEquip() {
         ArrayList<AbstractCard> cardCounter = AbstractDungeon.getRewardCards();
-        CardGroup rewards  = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
+        this.rewards  = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
         for (int i=0; i<Math.min(cardCounter.size(), AbstractDungeon.rareCardPool.size()); ++i){
-            rewards.addToTop(AbstractDungeon.getCard(AbstractCard.CardRarity.RARE));
-            while (rewards.group.subList(0, i).contains(rewards.group.get(i))){
-                rewards.group.set(i, AbstractDungeon.getCard(AbstractCard.CardRarity.RARE)); //keep trying until it succeeds
+            this.rewards.addToTop(AbstractDungeon.getCard(AbstractCard.CardRarity.RARE));
+            while (this.rewards.group.subList(0, i).contains(this.rewards.group.get(i))){
+                this.rewards.group.set(i, AbstractDungeon.getCard(AbstractCard.CardRarity.RARE)); //keep trying until it succeeds
             }
         }
+        AbstractDungeon.gridSelectScreen.open(rewards, 1,"", false, false, true, false);
         AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.INCOMPLETE;
+    }
+
+    @Override
+    public void update() {
+        if (AbstractDungeon.gridSelectScreen.selectedCards.size() == 1){
+            AbstractCard keep = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
+            for (AbstractCard c: this.rewards.group){
+                if (c.cardID != keep.cardID){
+                    Ban.banCard(c);
+                }
+            }
+            AbstractDungeon.player.masterDeck.addToTop(keep);
+        }
     }
 }

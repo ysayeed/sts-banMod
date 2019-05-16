@@ -379,6 +379,7 @@ public class DefaultMod implements
         BaseMod.addRelic(new RakkoonTail(), RelicType.SHARED);
         BaseMod.addRelic(new StellarCharm(), RelicType.SHARED);
         BaseMod.addRelic(new FeatherToken(), RelicType.SHARED);
+        BaseMod.addRelic(new FoolsGold(), RelicType.SHARED);
         
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
         UnlockTracker.markRelicAsSeen(BottledPlaceholderRelic.ID);

@@ -1,10 +1,16 @@
 package banMod.relics;
 
+import banMod.util.Ban;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import banMod.DefaultMod;
 import banMod.util.TextureLoader;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static banMod.DefaultMod.makeRelicOutlinePath;
 import static banMod.DefaultMod.makeRelicPath;
@@ -36,6 +42,35 @@ public class CapturedWildfire extends CustomRelic {
     @Override
     public void onEquip() {
         AbstractDungeon.player.energy.energyMaster += 1;
+        CardGroup upgraded = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
+        CardGroup unupgraded = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
+        ArrayList<String> toBan = new ArrayList<>();
+        for (AbstractCard c: AbstractDungeon.player.masterDeck.group){
+            if (c.upgraded){
+                upgraded.addToRandomSpot(c);
+            } else {
+                unupgraded.addToRandomSpot(c);
+            }
+        }
+        for (AbstractCard c: upgraded.group){
+            if (toBan.size()<2 && !toBan.contains(c.cardID)){
+                toBan.add(c.cardID);
+            }
+        }
+        for (AbstractCard c : unupgraded.group) {
+            if (toBan.size() < 2 && !toBan.contains(c.cardID)) {
+                toBan.add(c.cardID);
+            }
+        }
+        Iterator deckIterator = AbstractDungeon.player.masterDeck.group.iterator();
+
+        while(deckIterator.hasNext()) {
+            AbstractCard card = (AbstractCard)deckIterator.next();
+            if (toBan.contains(card.cardID)){
+                Ban.banCard(card);
+                AbstractDungeon.player.masterDeck.removeCard(card);
+            }
+        }
     }
 
     // Lose 1 energy on unequip.

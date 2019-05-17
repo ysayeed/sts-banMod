@@ -1,12 +1,12 @@
 package banMod.relics;
 
+import banMod.BanMod;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import banMod.DefaultMod;
 import banMod.util.TextureLoader;
 
-import static banMod.DefaultMod.makeRelicOutlinePath;
-import static banMod.DefaultMod.makeRelicPath;
+import static banMod.BanMod.makeRelicOutlinePath;
+import static banMod.BanMod.makeRelicPath;
 
 public class CheapLighter extends CustomRelic {
     /*
@@ -16,7 +16,7 @@ public class CheapLighter extends CustomRelic {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("CheapLighter");
+    public static final String ID = BanMod.makeID("CheapLighter");
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change

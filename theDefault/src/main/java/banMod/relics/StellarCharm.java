@@ -1,10 +1,10 @@
 package banMod.relics;
 
+import banMod.BanMod;
 import banMod.util.Ban;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
-import banMod.DefaultMod;
 import banMod.util.TextureLoader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
@@ -16,8 +16,8 @@ import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import java.util.ArrayList;
 
 
-import static banMod.DefaultMod.makeRelicOutlinePath;
-import static banMod.DefaultMod.makeRelicPath;
+import static banMod.BanMod.makeRelicOutlinePath;
+import static banMod.BanMod.makeRelicPath;
 
 public class StellarCharm extends CustomRelic implements CustomSavable<String> {
     /*
@@ -27,7 +27,7 @@ public class StellarCharm extends CustomRelic implements CustomSavable<String> {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("StellarCharm");
+    public static final String ID = BanMod.makeID("StellarCharm");
     private String curseID = null;
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change

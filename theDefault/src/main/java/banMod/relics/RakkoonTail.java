@@ -2,11 +2,11 @@ package banMod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import banMod.DefaultMod;
+import banMod.BanMod;
 import banMod.util.TextureLoader;
 
-import static banMod.DefaultMod.makeRelicOutlinePath;
-import static banMod.DefaultMod.makeRelicPath;
+import static banMod.BanMod.makeRelicOutlinePath;
+import static banMod.BanMod.makeRelicPath;
 
 public class RakkoonTail extends CustomRelic {
     /*
@@ -16,7 +16,7 @@ public class RakkoonTail extends CustomRelic {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("RakkoonTail");
+    public static final String ID = BanMod.makeID("RakkoonTail");
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change

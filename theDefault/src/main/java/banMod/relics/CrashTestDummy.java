@@ -5,7 +5,7 @@ import basemod.BaseMod;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
-import banMod.DefaultMod;
+import banMod.BanMod;
 import banMod.util.TextureLoader;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.monsters.MonsterInfo;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 
-import static banMod.DefaultMod.makeRelicOutlinePath;
-import static banMod.DefaultMod.makeRelicPath;
+import static banMod.BanMod.makeRelicOutlinePath;
+import static banMod.BanMod.makeRelicPath;
 
 public class CrashTestDummy extends CustomRelic implements CustomSavable<String> {
     /*
@@ -24,7 +24,7 @@ public class CrashTestDummy extends CustomRelic implements CustomSavable<String>
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("CrashTestDummy");
+    public static final String ID = BanMod.makeID("CrashTestDummy");
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change

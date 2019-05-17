@@ -1,9 +1,9 @@
 package banMod.relics;
 
+import banMod.BanMod;
 import banMod.util.Ban;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import banMod.DefaultMod;
 import banMod.util.TextureLoader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -12,8 +12,8 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.util.ArrayList;
 
-import static banMod.DefaultMod.makeRelicOutlinePath;
-import static banMod.DefaultMod.makeRelicPath;
+import static banMod.BanMod.makeRelicOutlinePath;
+import static banMod.BanMod.makeRelicPath;
 
 public class FoolsGold extends CustomRelic {
     /*
@@ -23,7 +23,7 @@ public class FoolsGold extends CustomRelic {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("FoolsGold");
+    public static final String ID = BanMod.makeID("FoolsGold");
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change

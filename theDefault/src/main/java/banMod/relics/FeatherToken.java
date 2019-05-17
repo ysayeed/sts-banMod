@@ -3,7 +3,7 @@ package banMod.relics;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
-import banMod.DefaultMod;
+import banMod.BanMod;
 import banMod.util.TextureLoader;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
@@ -17,8 +17,8 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import java.util.Iterator;
 import java.util.Map;
 
-import static banMod.DefaultMod.makeRelicOutlinePath;
-import static banMod.DefaultMod.makeRelicPath;
+import static banMod.BanMod.makeRelicOutlinePath;
+import static banMod.BanMod.makeRelicPath;
 
 public class FeatherToken extends CustomRelic implements CustomSavable<String> {
     /*
@@ -28,7 +28,7 @@ public class FeatherToken extends CustomRelic implements CustomSavable<String> {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("FeatherToken");
+    public static final String ID = BanMod.makeID("FeatherToken");
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png")); //change
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png")); //change

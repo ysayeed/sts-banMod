@@ -44,7 +44,8 @@ public class CapturedWildfire extends CustomRelic {
         AbstractDungeon.player.energy.energyMaster += 1;
         CardGroup upgraded = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
         CardGroup unupgraded = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
-        ArrayList<String> toBan = new ArrayList<>();
+        ArrayList<String> banNames = new ArrayList<>();
+        ArrayList<AbstractCard> toBan = new ArrayList<>();
         for (AbstractCard c: AbstractDungeon.player.masterDeck.group){
             if (c.upgraded){
                 upgraded.addToRandomSpot(c);
@@ -53,23 +54,26 @@ public class CapturedWildfire extends CustomRelic {
             }
         }
         for (AbstractCard c: upgraded.group){
-            if (toBan.size()<2 && !toBan.contains(c.cardID)){
-                toBan.add(c.cardID);
+            if (banNames.size()<2 && !banNames.contains(c.cardID)){
+                banNames.add(c.cardID);
             }
         }
         for (AbstractCard c : unupgraded.group) {
-            if (toBan.size() < 2 && !toBan.contains(c.cardID)) {
-                toBan.add(c.cardID);
+            if (banNames.size() < 2 && !banNames.contains(c.cardID)) {
+                banNames.add(c.cardID);
             }
         }
         Iterator deckIterator = AbstractDungeon.player.masterDeck.group.iterator();
 
         while(deckIterator.hasNext()) {
             AbstractCard card = (AbstractCard)deckIterator.next();
-            if (toBan.contains(card.cardID)){
+            if (banNames.contains(card.cardID)){
+                toBan.add(card);
                 Ban.banCard(card);
-                AbstractDungeon.player.masterDeck.removeCard(card);
             }
+        }
+        for (AbstractCard c: toBan){
+            AbstractDungeon.player.masterDeck.removeCard(c);
         }
     }
 

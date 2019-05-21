@@ -1,0 +1,18 @@
+Complete features:
+-implement core ban logic
+-CapturedWildfire Relic
+-StellarCharm
+-FeatherToken
+-FoolsGold
+
+Pending features (core):
+-Placeholder images for missing art
+-CheapLighter (needs campfire icon implemented)
+-CrashTestDummy (elite selection implemented, needs verification)
+-Add additional cards and events
+
+Pending features (non-critical):
+-Create real art for relics/cards
+-Add additional relics
+-rework core ban logic to use spirepatch
+-rework StellarCharm to work properly with Omamori (might be fixed in issue above)
